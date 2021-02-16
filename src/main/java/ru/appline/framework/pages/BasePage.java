@@ -71,6 +71,30 @@ public class BasePage {
     }
 
     /**
+     * Функция позволяющая производить scroll до любого элемента с помощью js со смещение
+     * Смещение задается количеством пикселей по вертикали и горизонтали, т.е. смещение до точки (x, y)
+     *
+     * @param element - веб-элемент странички
+     * @param x       - параметр координаты по горизонтали
+     * @param y       - параметр координаты по вертикали
+     * @see JavascriptExecutor
+     */
+    public void scrollWithOffset(WebElement element, int x, int y) {
+        String code = "window.scroll(" + (element.getLocation().x + x) + ","
+                + (element.getLocation().y + y) + ");";
+        js.executeScript(code, element, x, y);
+    }
+
+    public void scrollIntoMiddle(WebElement element){
+        String scrollElementIntoMiddle = "var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);"
+                + "var elementTop = arguments[0].getBoundingClientRect().top;"
+                + "window.scrollBy(0, elementTop-(viewPortHeight/2));";
+
+        js.executeScript(scrollElementIntoMiddle, element);
+    }
+
+
+    /**
      * Явное ожидание состояния кликабельности элемента
      *
      * @param element - веб-элемент который требует проверки на кликабельность
@@ -95,7 +119,7 @@ public class BasePage {
      * @param value - значение вводимое в поле
      */
     public void fillInputField(WebElement field, String value) {
-        scrollToElementJs(field);
+        //scrollToElementJs(field);
         elementToBeClickable(field).click();
         field.sendKeys(value);
     }

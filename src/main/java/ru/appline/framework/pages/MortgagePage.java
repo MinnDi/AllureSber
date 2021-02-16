@@ -32,11 +32,13 @@ public class MortgagePage extends BasePage {
                 inputFields) {
             if (inputField.findElement(By.xpath(fieldHeaderXPath)).getAttribute("textContent").contains(field)) {
                 inputField = inputField.findElement(By.xpath(inputValueXPath));
-
-                //getDriver().switchTo().defaultContent();
-                //scrollToElementJs(inputField);
-                //scrollWithOffset(inputField, 0, 900);
-                //getDriver().switchTo().frame(0);
+                action.moveToElement(inputField);
+                js.executeScript("window.scrollBy(0, -5000);");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 fillInputField(inputField, Keys.chord(Keys.CONTROL, "a")+ Keys.DELETE + value);
                 assertThat(inputField.getAttribute("value").replaceAll("\\D", ""), is(value.replaceAll("\\D", "")));
             }
