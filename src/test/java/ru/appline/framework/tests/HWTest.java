@@ -12,7 +12,7 @@ public class HWTest extends BaseTests {
     public void startTest() {
         app.getStartPage()
                 .selectMenuButton("Ипотека")
-                .selectMortgageForFinishedBuildings()
+                .selectMortgageType("Ипотека на готовое жильё")
                 .fillField("Стоимость недвижимости", "5180000")
                 .fillField("Первоначальный взнос", "3058000")
                 .fillField("Срок кредита", "30")
