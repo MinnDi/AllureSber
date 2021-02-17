@@ -51,11 +51,11 @@ public class ManagerPages {
         if (startPage == null) {
             startPage = new StartPage();
         }
-        return startPage;
+        return startPage.checkStartPageIsOpen();
     }
 
     /**
-     * Ленивая инициализация страницы ипотеки на готовое жилье{@link org.example.framework.pages.MortgagePage}
+     * Ленивая инициализация страницы ипотеки на готовое жилье{@link ru.appline.framework.pages.MortgagePage}
      *
      * @return MortgagePage
      */

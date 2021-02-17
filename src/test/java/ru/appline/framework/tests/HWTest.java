@@ -19,8 +19,8 @@ public class HWTest extends BaseTests {
                 .checkoutSwitch("Страхование жизни и здоровья")
                 .checkoutSwitch("Молодая семья")
                 .checkResults("Сумма кредита", "2122000")
-                .checkResults("Ежемесячный платеж", "16922")
-                .checkResults("Необходимый доход", "21 784")
+                .checkResults("Ежемесячный платеж", "16618")
+                .checkResults("Необходимый доход", "21393")
                 .checkResults("Процентная ставка","11");
     }
 }

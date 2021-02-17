@@ -1,8 +1,6 @@
 package ru.appline.framework.pages;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -10,8 +8,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.appline.framework.managers.ManagerPages;
 
+import java.util.concurrent.TimeUnit;
 
 import static ru.appline.framework.managers.DriverManager.getDriver;
+import static ru.appline.framework.managers.InitManager.props;
+import static ru.appline.framework.utils.PropConst.IMPLICITLY_WAIT;
 
 /**
  * @author Arkadiy_Alaverdyan
@@ -121,6 +122,7 @@ public class BasePage {
     public void fillInputField(WebElement field, String value) {
         //scrollToElementJs(field);
         elementToBeClickable(field).click();
+        js.executeScript("arguments[0].value=''",field);
         field.sendKeys(value);
     }
 
@@ -133,5 +135,33 @@ public class BasePage {
     public void fillDateField(WebElement field, String value) {
         scrollToElementJs(field);
         field.sendKeys(value);
+    }
+
+    /**
+     * @param by - Объект задающий локатор поиска {@link By}
+     * @return boolean - true если элемент присутствует, false если элемент отсутствует
+     */
+    public boolean isElementExist(By by) {
+        boolean flag = false;
+        try {
+            getDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+            getDriver().findElement(by);
+            flag = true;
+        } catch (NoSuchElementException ignore) {
+        } finally {
+            getDriver().manage().timeouts().implicitlyWait(Integer.parseInt(props.getProperty(IMPLICITLY_WAIT)), TimeUnit.SECONDS);
+        }
+        return flag;
+    }
+
+    /**
+     * @param by - Объект задающий локатор поиска {@link By}
+     * @return boolean - true если элемент присутствует, false если элемент отсутствует
+     */
+    public WebElement getExistingWebElement(By by) {
+        if (isElementExist(by)){
+            return getDriver().findElement(by);
+        }
+        return null;
     }
 }
