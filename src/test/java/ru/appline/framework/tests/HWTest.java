@@ -9,7 +9,7 @@ import ru.appline.framework.basetestsclass.BaseTests;
 public class HWTest extends BaseTests {
     @Test()
     @Tag("SmokeTest")
-    @DisplayName("Оформление программы страхования для путешественников")
+    @DisplayName("Оформление ипотеки на готовое жильё")
     @Description("Демонстрационный e2e сценарий")
     public void startTest() {
         app.getStartPage()
