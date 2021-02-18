@@ -17,11 +17,13 @@ public class MortgagePage extends BasePage {
     List<WebElement> inputFields;
 
     public MortgagePage checkIfMortgagePageOpen() {
+        log.info("Проверка, что страница ипотеки на готовое жильё открыта");
         assertThat(getDriver().getTitle(), is("Ипотека на готовое жилье — СберБанк"));
         return this;
     }
 
     public MortgagePage fillField(String field, String value) {
+        log.info("Заполнение поля "+field+" значением "+value);
         scrollToElementJs(getDriver().findElement(By.xpath("//h2[contains(. ,'Рассчитайте ипотеку')]")));
         getDriver().switchTo().frame("iFrameResizer0");
         String fieldHeaderXPath = "./div";
@@ -39,6 +41,7 @@ public class MortgagePage extends BasePage {
     }
 
     public MortgagePage checkoutSwitch(String switchName, boolean state) {
+        log.info("Ставим значение свича "+switchName+" в состояние "+state);
         getDriver().switchTo().frame("iFrameResizer0");
         String switchXPath = "//div[@data-test-id='controls']//span[contains(.,'%s')]";
         WebElement checkoutSwitch = getDriver().findElement(By.xpath(String.format(switchXPath, switchName)));
@@ -54,6 +57,7 @@ public class MortgagePage extends BasePage {
     }
 
     public MortgagePage checkResults(String field, String value) {
+        log.info("Проверяем, что значение поля "+field+" равно "+value);
         getDriver().switchTo().frame("iFrameResizer0");
         String resultXPath = "//div[@data-test-id='main-results-block']//li/span[contains(.,'%s')]";
         WebElement resultFiled = getDriver().findElement(By.xpath(String.format(resultXPath, field)));

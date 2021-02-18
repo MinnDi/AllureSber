@@ -22,12 +22,14 @@ public class StartPage extends BasePage {
     List<WebElement> subMenuButtons;
 
     public StartPage checkStartPageIsOpen(){
+        log.info("Проверка, что стартовая страница открыта");
         assertThat(getDriver().getTitle(), is("Частным клиентам — СберБанк"));
         closeCookie();
         return this;
     }
 
     public StartPage selectMenuButton(String menuOption){
+        log.info("Выбор пункта "+menuOption+" в меню");
         for (WebElement menuButton:
                 menuButtons) {
             if (menuButton.getAttribute("aria-label").equals(menuOption)){
@@ -41,14 +43,17 @@ public class StartPage extends BasePage {
     }
 
     private StartPage closeCookie(){
+
         WebElement cookie = getExistingWebElement(By.xpath("//button[@class='kitt-cookie-warning__close']"));
         if (cookie!=null){
             cookie.click();
+            log.info("Закрыли куки");
         }
         return this;
     }
 
     public MortgagePage selectMortgageType(String mortgageType){
+        log.info("Выбор пункта "+mortgageType+" из подменю");
         for (WebElement subMenuButton :
                 subMenuButtons) {
             if (subMenuButton.getAttribute("data-cga_click_top_menu").contains(mortgageType)) {

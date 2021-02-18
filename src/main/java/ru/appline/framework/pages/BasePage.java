@@ -1,5 +1,7 @@
 package ru.appline.framework.pages;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +21,8 @@ import static ru.appline.framework.utils.PropConst.IMPLICITLY_WAIT;
  * Базовый класс всех страничек
  */
 public class BasePage {
+
+    Log log = LogFactory.getLog(BasePage.class);
 
     /**
      * Менеджер страничек
