@@ -2,11 +2,13 @@ package ru.appline.framework.tests;
 
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ru.appline.framework.basetestsclass.BaseTests;
 
 public class HWTest extends BaseTests {
     @Test()
+    @Tag("SmokeTest")
     @DisplayName("Оформление программы страхования для путешественников")
     @Description("Демонстрационный e2e сценарий")
     public void startTest() {
